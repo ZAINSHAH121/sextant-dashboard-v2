@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import MetricCard from './MetricCard';
+
+
 
 function App() {
   const [ipAddress, setIpAddress] = useState('');
@@ -28,11 +31,12 @@ function App() {
     <div className="bg-black bg-opacity-30 p-10 rounded-2xl shadow-2xl text-center">
     <h1 className="text-4xl font-bold mb-6">🚀 Sextant Dashboard — Live Monitoring</h1>
 
-      <p className="text-2xl mb-2">IP Address: {ipAddress}</p>
-      <p className="text-2xl mb-2">Latency: {latency}</p>
-      <p className="text-2xl">
-        Status: {latency ? '✅ Online' : '❌ Offline'}
-      </p>
+    <div className="flex flex-wrap justify-center">
+  <MetricCard label="IP Address" value={ipAddress} />
+  <MetricCard label="Latency" value={latency} />
+  <MetricCard label="Status" value={latency ? '✅ Online' : '❌ Offline'} />
+</div>
+
     </div>
   </div>
 );
