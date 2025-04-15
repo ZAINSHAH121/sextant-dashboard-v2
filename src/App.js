@@ -24,25 +24,20 @@ function App() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-blue-600 to-blue-400 text-white">
-      <h1 className="text-5xl font-bold mb-8">Sextant Dashboard</h1>
-      <div className="bg-white text-gray-800 shadow-lg rounded-2xl p-8 w-80 text-center">
-
-        {loading ? (
-          <p className="animate-pulse text-lg">⏳ Fetching Network Info...</p>
-        ) : (
-          <>
-            <p className="text-lg mb-4"><strong>🌐 IP Address:</strong> {ipAddress}</p>
-            <p className="text-lg mb-4"><strong>📡 Latency:</strong> {latency}</p>
-            <p className="text-lg">
-              <strong>✅ Status:</strong> Online
-            </p>
-          </>
-        )}
-
-      </div>
+  <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white">
+    <div className="bg-black bg-opacity-30 p-10 rounded-2xl shadow-2xl text-center">
+      <h1 className="text-4xl font-bold mb-6">🌐 Sextant Network Dashboard</h1>
+      <p className="text-2xl mb-2">IP Address: {ipAddress}</p>
+      <p className="text-2xl mb-2">Latency: {latency}</p>
+      <p className="text-2xl">
+        Status: {latency ? '✅ Online' : '❌ Offline'}
+      </p>
     </div>
-  );
+  </div>
+);
+
+
+ 
 }
 
 export default App;
