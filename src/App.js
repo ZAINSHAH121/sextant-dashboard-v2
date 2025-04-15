@@ -30,6 +30,10 @@ function App() {
         <MetricCard label="IP Address" value={ipAddress} />
         <MetricCard label="Latency" value={latency} />
         <MetricCard label="Status" value={latency ? '✅ Online' : '❌ Offline'} />
+        
+        {/* Add these two lines */}
+        <MetricCard label="Download Speed" value="100 Mbps" />
+        <MetricCard label="Upload Speed" value="50 Mbps" />
       </div>
     </div>
   );
