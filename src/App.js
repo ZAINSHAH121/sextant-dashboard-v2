@@ -26,7 +26,8 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-800 flex flex-col items-center justify-start p-8">
       <h1 className="text-4xl text-white font-bold mb-8">🌐 Sextant Network Dashboard</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+
         <MetricCard label="IP Address" value={ipAddress} />
         <MetricCard label="Latency" value={latency} />
         <MetricCard label="Status" value={latency ? '✅ Online' : '❌ Offline'} />
