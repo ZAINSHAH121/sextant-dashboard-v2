@@ -34,6 +34,11 @@ function IpAddressCard({ version }) {
   if (loading) return <MetricCard label={`IPv${version === 'v6' ? 6 : 4} Address`} value="Loading..." />;
   if (error) return <MetricCard label={`IPv${version === 'v6' ? 6 : 4} Address`} value={error} />;
 
+  // Check if the IPv6 is identical to the IPv4 address
+  if (version === 'v6' && ip === '137.59.230.240') { // Replace with actual IPv4 address to compare
+    return <MetricCard label="IPv6 Address" value="IPv6 not available, showing IPv4 address" />;
+  }
+
   return <MetricCard label={`IPv${version === 'v6' ? 6 : 4} Address`} value={ip} />;
 }
 
