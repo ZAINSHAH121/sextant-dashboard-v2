@@ -35,6 +35,8 @@ setUploadSpeed(randomUpload);
   return (
     <div className="min-h-screen bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-800 flex flex-col items-center justify-start p-8">
       <h1 className="text-4xl text-white font-bold mb-8">🌐 Sextant Network Dashboard</h1>
+      {loading && <p className="text-white mb-4">Fetching network data...</p>}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 
         <MetricCard label="IP Address" value={ipAddress} />
