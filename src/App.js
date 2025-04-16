@@ -4,6 +4,9 @@ import MetricCard from './components/MetricCard';
 function App() {
   const [ipAddress, setIpAddress] = useState('');
   const [latency, setLatency] = useState('');
+  const [downloadSpeed, setDownloadSpeed] = useState('');
+  const [uploadSpeed, setUploadSpeed] = useState('');
+
   const [loading, setLoading] = useState(true);
 
   const fetchNetworkData = () => {
@@ -13,6 +16,12 @@ function App() {
       .then(data => {
         setIpAddress(data.ip);
         setLatency(`${Math.floor(Math.random() * 500) + 100} ms`);
+        const randomDownload = `${Math.floor(Math.random() * 900) + 100} Mbps`;
+const randomUpload = `${Math.floor(Math.random() * 90) + 10} Mbps`;
+
+setDownloadSpeed(randomDownload);
+setUploadSpeed(randomUpload);
+
         setLoading(false);
       });
   };
@@ -33,8 +42,9 @@ function App() {
         <MetricCard label="Status" value={latency ? '✅ Online' : '❌ Offline'} />
         
         {/* Add these two lines */}
-        <MetricCard label="Download Speed" value="100 Mbps" />
-        <MetricCard label="Upload Speed" value="50 Mbps" />
+        <MetricCard label="Download Speed" value={downloadSpeed} />
+        <MetricCard label="Upload Speed" value={uploadSpeed} /> 
+
       </div>
     </div>
   );
