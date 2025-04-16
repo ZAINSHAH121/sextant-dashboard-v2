@@ -31,7 +31,14 @@ setUploadSpeed(randomUpload);
     const interval = setInterval(fetchNetworkData, 5000); // Refresh every 5 sec
     return () => clearInterval(interval);
   }, []);
-
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center text-white text-2xl">
+        Loading network data...
+      </div>
+    );
+  }
+  
   return (
     <div className="min-h-screen bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-800 flex flex-col items-center justify-start p-8">
       <h1 className="text-4xl text-white font-bold mb-8">🌐 Sextant Network Dashboard</h1>
@@ -48,8 +55,15 @@ setUploadSpeed(randomUpload);
         <MetricCard label="Upload Speed" value={uploadSpeed} /> 
 
       </div>
+      <footer className="text-white mt-10 text-sm opacity-70">
+  © 2025 Sextant by Syed Zain Qaiser — All rights reserved.
+</footer>
     </div>
+    
+  
   );
 }
+
+
 
 export default App;
