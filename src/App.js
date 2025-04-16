@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import MetricCard from './components/MetricCard';
 import Banner from './components/Banner';
 import Exhibit from './components/Exhibit';
+import IpAddressCard from './components/IpAddressCard';
 
 function App() {
-  const [ipAddress, setIpAddress] = useState('');
   const [latency, setLatency] = useState('');
   const [downloadSpeed, setDownloadSpeed] = useState('');
   const [uploadSpeed, setUploadSpeed] = useState('');
@@ -12,22 +12,17 @@ function App() {
 
   const fetchNetworkData = () => {
     setLoading(true);
-    fetch('https://api.ipify.org?format=json')
-      .then(response => response.json())
-      .then(data => {
-        setIpAddress(data.ip);
-        setLatency(`${Math.floor(Math.random() * 500) + 100} ms`);
-        const randomDownload = `${Math.floor(Math.random() * 900) + 100} Mbps`;
-        const randomUpload = `${Math.floor(Math.random() * 90) + 10} Mbps`;
-        setDownloadSpeed(randomDownload);
-        setUploadSpeed(randomUpload);
-        setLoading(false);
-      });
+    setLatency(`${Math.floor(Math.random() * 500) + 100} ms`);
+    const randomDownload = `${Math.floor(Math.random() * 900) + 100} Mbps`;
+    const randomUpload = `${Math.floor(Math.random() * 90) + 10} Mbps`;
+    setDownloadSpeed(randomDownload);
+    setUploadSpeed(randomUpload);
+    setLoading(false);
   };
 
   useEffect(() => {
-    fetchNetworkData();  // Fetch at start
-    const interval = setInterval(fetchNetworkData, 5000); // Refresh every 5 sec
+    fetchNetworkData();
+    const interval = setInterval(fetchNetworkData, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -44,8 +39,12 @@ function App() {
 
       <Banner />
 
+      <Exhibit heading="IP Addresses">
+        <IpAddressCard version="v4" />
+        <IpAddressCard version="v6" />
+      </Exhibit>
+
       <Exhibit heading="Network Information">
-        <MetricCard label="IP Address" value={ipAddress} />
         <MetricCard label="Latency" value={latency} />
         <MetricCard label="Status" value={latency ? '✅ Online' : '❌ Offline'} />
       </Exhibit>
