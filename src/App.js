@@ -3,6 +3,8 @@ import MetricCard from './components/MetricCard';
 import Banner from './components/Banner';
 import Exhibit from './components/Exhibit';
 import IpAddressCard from './components/IpAddressCard';
+import LatencyCard from './components/LatencyCard';
+
 
 function App() {
   const [latency, setLatency] = useState('');
@@ -45,7 +47,8 @@ function App() {
       </Exhibit>
 
       <Exhibit heading="Network Information">
-        <MetricCard label="Latency" value={latency} />
+      <LatencyCard />
+
         <MetricCard label="Status" value={latency ? '✅ Online' : '❌ Offline'} />
       </Exhibit>
 
