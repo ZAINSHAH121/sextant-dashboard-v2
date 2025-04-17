@@ -1,46 +1,44 @@
 import { useState, useEffect } from 'react';
-import MetricCard from './MetricCard';
 
-function LatencyCard() {
-  const [latency, setLatency] = useState('Connecting...');
+const LatencyCard = () => {
+  const [latency, setLatency] = useState('Waiting for data...');
+  const [connectionStatus, setConnectionStatus] = useState('Connecting...');
 
   useEffect(() => {
-    // Replace this URL once your instructor shares the real one!
-    const socket = new WebSocket('wss://your-pylon-server-url-here');
+    const socket = new WebSocket('ws://localhost:55455');  // Connect to WebSocket server
 
     socket.onopen = () => {
-      console.log("✅ WebSocket connected to Pylon server.");
+      setConnectionStatus('Connected to WebSocket');
+      console.log('WebSocket Connected');
     };
 
     socket.onmessage = (event) => {
-      try {
-        const packet = JSON.parse(event.data);
-        const sentTime = packet.timestamp;
-        const currentTime = Date.now();
-        const latencyMs = currentTime - sentTime;
-        setLatency(`${latencyMs} ms`);
-      } catch (error) {
-        console.error("⚠️ Failed to parse latency packet:", error);
-        setLatency('Invalid data');
-      }
+      const receivedTimestamp = parseInt(event.data, 10);
+      const currentTimestamp = Date.now();
+      const latencyValue = currentTimestamp - receivedTimestamp;
+      setLatency(`${latencyValue} ms`);
     };
 
     socket.onerror = (error) => {
-      console.error("❌ WebSocket error:", error);
-      setLatency('Error fetching latency');
+      console.error('WebSocket Error:', error);
     };
 
     socket.onclose = () => {
-      console.warn("⚠️ WebSocket closed");
-      setLatency('Disconnected');
+      setConnectionStatus('WebSocket connection closed');
+      console.log('WebSocket connection closed');
     };
 
     return () => {
-      socket.close(); // Cleanly close the socket when unmounting
+      socket.close();
     };
   }, []);
 
-  return <MetricCard label="Latency" value={latency} />;
-}
+  return (
+    <div className="metric-card">
+      <h3 className="text-white">{connectionStatus}</h3>
+      <p className="text-lg text-white">Latency: {latency}</p>
+    </div>
+  );
+};
 
 export default LatencyCard;
